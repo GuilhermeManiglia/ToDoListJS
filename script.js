@@ -1,45 +1,50 @@
+let botAdd = document.getElementsByClassName("botao-acrescentar")[0];
 let lista = document.getElementsByClassName("tarefas-lista")[0];
-let listaCompleta = [];
 
-function adicionar() {
-  let textInput = document.getElementsByClassName("input-adicionar")[0].value;
+function adicionarTexto() {
+  let texto = document.getElementsByClassName("input-adicionar")[0].value;
+  let novaLista = document.createElement("div");
+  novaLista.className = "div-lista"; // Define a classe do contêiner
+  novaLista.innerHTML = `
+    <li class="lista-elemento">
+      <p>${texto}</p>
+      <div>
+        <button class="botao-concluido-lista">Concluído</button>
+        <button class="botao-remover-lista">Remover</button>
+      </div>
+    </li>`;
 
-  if (!textInput.trim()) {
-    alert("Por favor, insira um texto válido.");
-    return;
-  }
+  lista.appendChild(novaLista);
 
-  lista.innerHTML += `<li class="new-element-list">
-                        <div class="novas-tarefas-total">
-                            <p>${textInput}</p>
-                            <div class="bot-divs-new">
-                                <button class="botao-concluido-lista">+</button>
-                                <button class="botao-remover-lista">-</button>
-                            </div>
-                        </div>
-                      </li>`;
+  texto.value = "";
 
-  listaCompleta.push(textInput);
+  // Vincula o evento ao botão criado dinamicamente
+  let botaoConcluido = novaLista.querySelector(".botao-concluido-lista");
+  botaoConcluido.addEventListener("click", (event) => {
+    mudarFundo(event.target);
+  });
 
-  // Atualiza eventos dos botões de remover
-  configurarBotoesRemover();
+  let botaoRemover = novaLista.querySelector(".botao-remover-lista");
+  botaoRemover.addEventListener("click", (event) => {
+    removerDiv(event.target);
+  });
 }
 
-function configurarBotoesRemover() {
-  // Seleciona todos os botões de remover
-  const botoesRemover = document.querySelectorAll(".botao-remover-lista");
+botAdd.addEventListener("click", () => {
+  adicionarTexto();
+});
 
-  // Adiciona evento de clique para cada botão
-  botoesRemover.forEach((botao) => {
-    botao.onclick = function () {
-      const li = this.closest("li"); // Encontra o <li> mais próximo do botão
-      if (li) {
-        li.remove(); // Remove o <li>
-        // Remove o texto do array listaCompleta
-        const texto = li.querySelector("p").textContent;
-        listaCompleta = listaCompleta.filter((item) => item !== texto);
-        console.log(listaCompleta);
-      }
-    };
-  });
+function mudarFundo(botao) {
+  // Encontra o contêiner pai mais próximo com a classe "div-lista"
+  let elementoPai = botao.closest(".div-lista");
+  if (elementoPai) {
+    elementoPai.style.backgroundColor = "rgb(23, 131, 2)"; // Altera o fundo apenas do contêiner correspondente
+  }
+}
+
+function removerDiv(remover) {
+  let elementoPaiRemover = remover.closest(".div-lista");
+  if (elementoPaiRemover) {
+    elementoPaiRemover.style.display = "none";
+  }
 }

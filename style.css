@@ -58,7 +58,7 @@ li {
   justify-content: center;
   transition: 0.2s;
   flex-direction: row;
-  width: 500px;
+  text-align: start;
 }
 
 .lista {
@@ -70,24 +70,23 @@ li {
 }
 
 .botao-concluido-lista {
-  width: 30px;
-  height: 30px;
-  border-radius: 90px;
   border: none;
   background-color: rgb(17, 201, 0);
   cursor: pointer;
   transition: 0.42s;
+  padding: 10px 20px;
+  border-radius: 6px;
 }
 
 .botao-remover-lista {
-  width: 30px;
-  height: 30px;
-  border-radius: 90px;
+  padding: 10px 20px;
+  border-radius: 6px;
   border: none;
   background-color: rgb(201, 0, 0);
   cursor: pointer;
   margin-left: 7px;
   transition: 0.42s;
+  margin-right: 10px;
 }
 
 .botao-remover-lista:hover {
@@ -98,33 +97,19 @@ li {
   background-color: rgb(43, 255, 0);
 }
 
-li:hover {
-  padding-left: 30px;
-}
-
 .tarefas-lista {
   display: flex;
   flex-direction: column;
 }
 
-.bot-divs-new {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.div-lista {
+  background-color: rgb(39, 39, 39);
+  margin-top: 20px;
+  border-radius: 8px;
+  width: 500px;
 }
 
-.novas-tarefas-total {
+.lista-elemento {
   display: flex;
   justify-content: space-between;
-}
-
-p {
-  margin: 0;
-  display: flex;
-  align-items: center;
-}
-
-.new-element-list {
-  background-color: rgb(39, 39, 39);
-  margin-top: 30px;
 }
