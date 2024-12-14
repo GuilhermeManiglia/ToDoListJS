@@ -1,50 +1,35 @@
 let botAdd = document.getElementsByClassName("botao-acrescentar")[0];
 let lista = document.getElementsByClassName("tarefas-lista")[0];
 
-function adicionarTexto() {
-  let texto = document.getElementsByClassName("input-adicionar")[0].value;
-  let novaLista = document.createElement("div");
-  novaLista.className = "div-lista"; // Define a classe do contêiner
-  novaLista.innerHTML = `
-    <li class="lista-elemento">
-      <p>${texto}</p>
-      <div>
-        <button class="botao-concluido-lista">Concluído</button>
-        <button class="botao-remover-lista">Remover</button>
-      </div>
-    </li>`;
+function addText() {
+  let textoInput = document.getElementsByClassName("input-adicionar")[0];
+  let texto = textoInput.value;
+  let novoElemento = document.createElement("li");
+  novoElemento.className = "div-lista";
+  novoElemento.innerHTML = `<p>${texto}</p>
+  <div>
+  <button class="botao-concluido-lista" onclick="bg(this)">Concluido</button>
+  <button class="botao-remover-lista" onclick="remove(this)">Remover</button>
+  </div>`;
 
-  lista.appendChild(novaLista);
-
-  texto.value = "";
-
-  // Vincula o evento ao botão criado dinamicamente
-  let botaoConcluido = novaLista.querySelector(".botao-concluido-lista");
-  botaoConcluido.addEventListener("click", (event) => {
-    mudarFundo(event.target);
-  });
-
-  let botaoRemover = novaLista.querySelector(".botao-remover-lista");
-  botaoRemover.addEventListener("click", (event) => {
-    removerDiv(event.target);
-  });
+  if (texto == "") {
+    alert("Digite um texto válido");
+  } else {
+    lista.appendChild(novoElemento);
+    textoInput.value = "";
+  }
 }
 
-botAdd.addEventListener("click", () => {
-  adicionarTexto();
+botAdd.addEventListener("click", function () {
+  addText();
 });
 
-function mudarFundo(botao) {
-  // Encontra o contêiner pai mais próximo com a classe "div-lista"
-  let elementoPai = botao.closest(".div-lista");
-  if (elementoPai) {
-    elementoPai.style.backgroundColor = "rgb(23, 131, 2)"; // Altera o fundo apenas do contêiner correspondente
-  }
+function bg(a) {
+  let li = a.closest("li");
+  li.style.backgroundColor = "#35b900";
 }
 
-function removerDiv(remover) {
-  let elementoPaiRemover = remover.closest(".div-lista");
-  if (elementoPaiRemover) {
-    elementoPaiRemover.style.display = "none";
-  }
+function remove(b) {
+  let li = b.closest("li");
+  lista.removeChild(li);
 }

@@ -59,6 +59,7 @@ li {
   transition: 0.2s;
   flex-direction: row;
   text-align: start;
+  transition: 3s ease;
 }
 
 .lista {
@@ -71,7 +72,7 @@ li {
 
 .botao-concluido-lista {
   border: none;
-  background-color: rgb(17, 201, 0);
+  background-color: #48ff00;
   cursor: pointer;
   transition: 0.42s;
   padding: 10px 20px;
@@ -89,14 +90,6 @@ li {
   margin-right: 10px;
 }
 
-.botao-remover-lista:hover {
-  background-color: rgb(250, 0, 0);
-}
-
-.botao-concluido-lista:hover {
-  background-color: rgb(43, 255, 0);
-}
-
 .tarefas-lista {
   display: flex;
   flex-direction: column;
@@ -107,9 +100,15 @@ li {
   margin-top: 20px;
   border-radius: 8px;
   width: 500px;
+  padding: 15px;
+  justify-content: space-between;
 }
 
 .lista-elemento {
   display: flex;
   justify-content: space-between;
+}
+
+.tarefas-lista:hover {
+  padding-left: 20px;
 }
